@@ -4,8 +4,8 @@ import numpy as np
 import onnxruntime
 import onnx
 
-from src.inference.abs import Basemodel
-from src.exceptions import NotLoadableONNX
+from inference.abs import Basemodel
+from exceptions import NotLoadableONNX
 
 
 def create_outputs(outputs:Dict[Union[str, int], Any], results:Dict[Union[str, int], Any]):

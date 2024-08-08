@@ -3,9 +3,9 @@ from typing import Dict, List, Tuple, Union
 
 import numpy as np
 
-from src.inference.abs import Basemodel
-from src.enums import EnumInputNodeShapeFormat, EnumNodeRawDataType
-from src.exceptions import NotLoadableTFLITE
+from inference.abs import Basemodel
+from enums import EnumInputNodeShapeFormat, EnumNodeRawDataType
+from exceptions import NotLoadableTFLITE
 
 try:
     import tflite_runtime.interpreter as tflite

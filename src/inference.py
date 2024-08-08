@@ -2,7 +2,7 @@ import argparse
 
 from loguru import logger
 
-from src.inference.inference_service import InferenceService
+from inference.inference_service import InferenceService
 
 
 def parse_opt():

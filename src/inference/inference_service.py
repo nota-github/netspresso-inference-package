@@ -5,11 +5,11 @@ from typing import Dict, Any
 import numpy as np
 from loguru import logger
 
-from src.inference.tflite_inference import TFLITE
-from src.inference.onnx_inference import ONNX
-from src.inference.data_loader import NumpyDataLoader
-from src.utils import make_temp_dir, compress_files, delete_parent_directory
-from src.exceptions import NotSupportedFramework
+from inference.tflite_inference import TFLITE
+from inference.onnx_inference import ONNX
+from inference.data_loader import NumpyDataLoader
+from utils import make_temp_dir, compress_files, delete_parent_directory
+from exceptions import NotSupportedFramework
 
 
 class InferenceService:
