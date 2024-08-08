@@ -72,4 +72,4 @@ if __name__ == "__main__":
         model_file_path="/app/tests/people_detection.onnx",
         dataset_file_path="/app/tests/dataset_for_onnx.npy"
         )
-    inf_result = inf_service.run()
+    inf_service.run()
