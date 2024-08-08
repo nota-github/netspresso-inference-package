@@ -9,3 +9,4 @@ __pypackages__/
 .python_history
 .viminfo
 .venv
+.keras

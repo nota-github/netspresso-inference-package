@@ -12,3 +12,5 @@ dockerfile
 .venv
 
 __pycache__/
+
+.keras
