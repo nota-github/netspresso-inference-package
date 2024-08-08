@@ -1,6 +1,6 @@
 # How to use
 
-## 직접 사용
+## Use directly
 model_file_path: Model file path(ONNX, TFLite)
 dataset_file_path: The path to the compressed file or the individual npy files where the delimiter of the input layer is used as the file name.
 
@@ -8,7 +8,7 @@ dataset_file_path: The path to the compressed file or the individual npy files w
 python3 src/inference.py --model_file_path tests/your_model_file.tflite --dataset_file_path tests/your_dataset_file.npy 
 ```
 
-## import 하여 사용
+## Import and use
 
 ```python
 inf_service = InferenceService(
