@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitmodules
+
+dockerfile
+.dockerignore
+
+.python_history
+
+.viminfo
+
+.venv
+
+__pycache__/

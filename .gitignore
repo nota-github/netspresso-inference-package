@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+# Distribution / packaging
+.Python
+.cache
+.pytest_cache/
+__pypackages__/
+*.pyc
+.python_history
+.viminfo
+.venv
