@@ -5,9 +5,9 @@ from typing import Dict, Any, Union
 import numpy as np
 from loguru import logger
 
-from enums import Enums
-from utils import extract_archive
-from exceptions import NumpyLoadError, WrongDatsetFile
+from ..enums import Enums
+from ..utils import extract_archive
+from ..exceptions import NumpyLoadError, WrongDatsetFile
 
 
 class NumpyDataLoader:

@@ -3,9 +3,9 @@ from typing import Dict, List, Tuple, Union
 
 import numpy as np
 
-from inference.abs import Basemodel
-from enums import EnumInputNodeShapeFormat, EnumNodeRawDataType
-from exceptions import NotLoadableTFLITE
+from .abs import Basemodel
+from ..enums import EnumInputNodeShapeFormat, EnumNodeRawDataType
+from ..exceptions import NotLoadableTFLITE
 
 try:
     import tflite_runtime.interpreter as tflite
@@ -119,6 +119,7 @@ class TFLITE(Basemodel):
         except:
             raise NotLoadableTFLITE()
         self.interpreter_obj.allocate_tensors()
+        import pdb; pdb.set_trace()
         self.inputs, self.outputs = self.model_input_output_attributes()
 
     def model_input_output_attributes(self):

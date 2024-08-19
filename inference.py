@@ -2,7 +2,7 @@ import argparse
 
 from loguru import logger
 
-from inference.inference_service import InferenceService
+from netspresso_inference_package.inference.inference_service import InferenceService
 
 
 def parse_opt():
