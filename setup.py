@@ -5,7 +5,7 @@ install_requires = Path("requirements.txt").read_text().split('\n')
 
 setup(
     name="netspresso_inference_package",
-    version="0.1.1",
+    version="0.1.2",
     author="NetsPresso",
     author_email="netspresso@nota.ai",
     description="Inference module.",
