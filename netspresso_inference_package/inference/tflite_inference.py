@@ -58,6 +58,14 @@ class DataAttribute:
         self._dtype = EnumNodeRawDataType(value).value
 
     @property
+    def quantization(self) -> Union[None, tuple]:
+        return self._quantization
+
+    @quantization.setter
+    def quantization(self, value):
+        self._quantization = value
+
+    @property
     def format(self) -> Union[None, str]:
         return self._format
 
@@ -131,6 +139,7 @@ class TFLITE(Basemodel):
             input_data_attribute.location = input_detail.get("index")
             input_data_attribute.shape = tuple(input_detail.get("shape"))
             input_data_attribute.dtype = input_detail.get("dtype").__name__
+            input_data_attribute.quantization = input_detail.get("quantization")
             inputs[input_data_attribute.key] = input_data_attribute
 
         for output_detail in self.interpreter_obj.get_output_details():
@@ -139,11 +148,16 @@ class TFLITE(Basemodel):
             output_data_attribute.location = output_detail.get("index")
             output_data_attribute.shape = tuple(output_detail.get("shape"))
             output_data_attribute.dtype = output_detail.get("dtype").__name__
+            output_data_attribute.quantization = output_detail.get("quantization")
             outputs[output_data_attribute.key] = output_data_attribute
 
         return inputs, outputs    
 
     def inference(self, preprocess_result: Dict[int, np.ndarray], **kwargs) -> Dict[int, np.ndarray]:
+        for k, v in self.inputs.items():
+            if v.dtype in [np.uint8, np.int8, "int8", "unit8"]:
+                pass
+
         for location, value in iter(preprocess_result.items()):
             self.interpreter_obj.set_tensor(location, value)
             # TODO: make function which return npy generator when len(preprocess_result[k]) > 1

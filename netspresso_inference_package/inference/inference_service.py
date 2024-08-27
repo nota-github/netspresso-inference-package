@@ -13,12 +13,9 @@ from ..exceptions import NotSupportedFramework
 
 
 class InferenceService:
-    def __init__(self, model_file_path:str, dataset_file_path:str, num_threads:int=1):
+    def __init__(self, model_file_path:str, num_threads:int=1):
         self.model_file_path = model_file_path
-        self.dataset_file_path = dataset_file_path
         self.model_obj, self.inputs, self.outputs = self.set_model_obj(model_file_path, num_threads)
-        self.data_loader = NumpyDataLoader(dataset_file_path, self.inputs)
-        self.data_loader.load_datasets(dataset_file_path, self.inputs)
         self.result_save_path = make_temp_dir()
 
     def set_model_obj(self, model_file_path:str, num_threads:int):
@@ -42,8 +39,10 @@ class InferenceService:
             logger.info(f'{self.model_file_path} has {len(model_obj.outputs)} nodes for output layer')
         return model_obj, model_obj.inputs, model_obj.outputs
 
-    def inference(self):
+    def inference(self, dataset_file_path):
         try:
+            self.data_loader = NumpyDataLoader(dataset_file_path, self.inputs)
+            self.data_loader.load_datasets(dataset_file_path, self.inputs)
             return self.model_obj.inference(self.data_loader.npy)
         except Exception as e: # TODO make a exception
             raise e
@@ -60,8 +59,8 @@ class InferenceService:
         compress_files(files_path, result_file_path)
         self.result_file_path = result_file_path
     
-    def run(self):
-        inference_results = self.inference()
+    def run(self, dataset_file_path):
+        inference_results = self.inference(dataset_file_path)
         logger.info(f"Inference success: {self.model_file_path}")
         self.postprocess(inference_results)
 

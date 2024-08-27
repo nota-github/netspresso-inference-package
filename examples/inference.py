@@ -15,10 +15,9 @@ def parse_opt():
 
 def main(model_file_path:str, dataset_file_path:str):
     inf_service = InferenceService(
-        opt.model_file_path,
-        opt.dataset_file_path
+        model_file_path,
         )
-    inf_service.run()
+    inf_service.run(dataset_file_path)
     logger.info(f"Result file path: {inf_service.result_file_path}")
     return inf_service.result_file_path
 
