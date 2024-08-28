@@ -119,7 +119,6 @@ class TFLITE(Basemodel):
         except:
             raise NotLoadableTFLITE()
         self.interpreter_obj.allocate_tensors()
-        import pdb; pdb.set_trace()
         self.inputs, self.outputs = self.model_input_output_attributes()
 
     def model_input_output_attributes(self):
