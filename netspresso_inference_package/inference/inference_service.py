@@ -68,7 +68,6 @@ class InferenceService:
 if __name__ == "__main__":
 
     inf_service = InferenceService(
-        model_file_path="/app/tests/people_detection.onnx",
-        dataset_file_path="/app/tests/dataset_for_onnx.npy"
+        model_file_path="/app/tests/people_detection.onnx"
         )
-    inf_service.run()
+    inf_service.run(dataset_file_path="/app/tests/dataset_for_onnx.npy")

@@ -13,9 +13,8 @@ python3 inference.py --model_file_path tests/your_model_file.tflite --dataset_fi
 ```python
 from netspresso_inference_package.inference.inference_service import InferenceService
 inf_service = InferenceService(
-        model_file_path="/app/tests/people_detection.onnx",
-        dataset_file_path="/app/tests/dataset_for_onnx.npy"
+        model_file_path="/app/tests/people_detection.onnx"
         )
-inf_service.run()
+inf_service.run(dataset_file_path="/app/tests/dataset_for_onnx.npy")
 print(inf_service.result_file_path)
 ```
