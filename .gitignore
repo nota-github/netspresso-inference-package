@@ -10,3 +10,6 @@ __pypackages__/
 .viminfo
 .venv
 .keras
+
+.bash_history
+.pypirc
