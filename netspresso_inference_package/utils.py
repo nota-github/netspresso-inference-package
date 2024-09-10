@@ -1,9 +1,9 @@
 import os
-import tempfile
-from pathlib import Path
-import zipfile
-import tarfile
 import shutil
+import tarfile
+import tempfile
+import zipfile
+from pathlib import Path
 
 import py7zr
 import rarfile

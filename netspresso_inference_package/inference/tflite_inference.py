@@ -3,9 +3,9 @@ from typing import Dict, List, Tuple, Union
 
 import numpy as np
 
-from .abs import Basemodel
 from ..enums import EnumInputNodeShapeFormat, EnumNodeRawDataType
 from ..exceptions import NotLoadableTFLITE
+from .abs import Basemodel
 
 try:
     import tflite_runtime.interpreter as tflite
@@ -151,10 +151,10 @@ class TFLITE(Basemodel):
             output_data_attribute.quantization = output_detail.get("quantization")
             outputs[output_data_attribute.key] = output_data_attribute
 
-        return inputs, outputs    
+        return inputs, outputs
 
     def inference(self, preprocess_result: Dict[int, np.ndarray], **kwargs) -> Dict[int, np.ndarray]:
-        for k, v in self.inputs.items():
+        for _k, v in self.inputs.items():
             if v.dtype in [np.uint8, np.int8, "int8", "unit8"]:
                 pass
 

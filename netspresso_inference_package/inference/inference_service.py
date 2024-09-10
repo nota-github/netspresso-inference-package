@@ -1,15 +1,15 @@
 import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 import numpy as np
 from loguru import logger
 
-from .tflite_inference import TFLITE
-from .onnx_inference import ONNX
-from .data_loader import NumpyDataLoader
-from ..utils import make_temp_dir, compress_files, delete_parent_directory
 from ..exceptions import NotSupportedFramework
+from ..utils import compress_files, make_temp_dir
+from .data_loader import NumpyDataLoader
+from .onnx_inference import ONNX
+from .tflite_inference import TFLITE
 
 
 class InferenceService:
@@ -33,7 +33,7 @@ class InferenceService:
         #     model_obj = TFLITE(model_file_path, kwargs["num_threads"])
         # elif model_info[Enums.FRAMEWORK] == Enums.ONNX:
         #     model_obj = ONNX(model_file_path)
-        
+
         if len(model_obj.inputs) > 1:
             logger.info(f'{self.model_file_path} has {len(model_obj.inputs)} nodes for input layer')
         if len(model_obj.outputs) > 1:
@@ -52,14 +52,14 @@ class InferenceService:
         # save npy file for each layers result
         files_path = []
         result_file_path = os.path.join(self.result_save_path, "archive.zip")
-        for k, v in inference_results.items():
+        for k, _v in inference_results.items():
             npy_file_path = os.path.join(self.result_save_path, f"{k}.npy")
             np.save(npy_file_path, inference_results[k])
             files_path.append(npy_file_path)
         # zip npy files
         compress_files(files_path, result_file_path)
         self.result_file_path = result_file_path
-    
+
     def run(self, dataset_file_path):
         self.dataset_file_path = dataset_file_path
         inference_results = self.inference(dataset_file_path)
@@ -71,5 +71,5 @@ if __name__ == "__main__":
 
     inf_service = InferenceService(
         model_file_path="/app/tests/people_detection.onnx"
-        )
+    )
     inf_service.run(dataset_file_path="/app/tests/dataset_for_onnx.npy")

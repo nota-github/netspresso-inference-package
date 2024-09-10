@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Enums(Enum):
     FRAMEWORK = "framework"
     INPUTS = "inputs"

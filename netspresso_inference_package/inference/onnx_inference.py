@@ -1,20 +1,20 @@
-from typing import Dict, Union, Any
+from typing import Any, Dict, Union
 
 import numpy as np
-import onnxruntime
 import onnx
+import onnxruntime
 
-from .abs import Basemodel
 from ..exceptions import NotLoadableONNX
+from .abs import Basemodel
 
 
 def create_outputs(outputs:Dict[Union[str, int], Any], results:Dict[Union[str, int], Any]):
     if len(outputs) != len(results):
         raise ValueError("The length of 'outputs' and 'results' must be the same.")
 
-    for (key, value), result in zip(outputs.items(), results):
+    for (key, _value), result in zip(outputs.items(), results):
         outputs[key] = result
-    
+
     return outputs
 
 
@@ -41,18 +41,18 @@ class ONNX(Basemodel):
         for oup in model.graph.output:
             shape = str(oup.type.tensor_type.shape.dim)
             outputs[oup.name] = [int(s) for s in shape.split() if s.isdigit()]
-        
+
         return inputs, outputs
 
     def inference(self, preprocess_result: Dict[int, np.ndarray]) -> Dict[int, np.ndarray]:
         inputs = {}
-        for k, v in preprocess_result.items():
+        for k, _v in preprocess_result.items():
             ortvalue = onnxruntime.OrtValue.ortvalue_from_numpy(preprocess_result[k])
             inputs[k] = ortvalue
             # TODO: make function which return npy generator when len(preprocess_result[k]) > 1
-        
+
         outputs_list = []
-        for k in self.outputs.keys():
+        for k in self.outputs:
             outputs_list.append(k)
 
         results = self.model_obj.run(outputs_list, inputs)
