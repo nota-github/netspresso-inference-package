@@ -17,6 +17,7 @@ class InferenceService:
         self.model_file_path = model_file_path
         self.model_obj, self.inputs, self.outputs = self.set_model_obj(model_file_path, num_threads)
         self.result_save_path = make_temp_dir()
+        self.dataset_file_path = None
 
     def set_model_obj(self, model_file_path:str, num_threads:int):
         suffix = Path(model_file_path).suffix
@@ -60,6 +61,7 @@ class InferenceService:
         self.result_file_path = result_file_path
     
     def run(self, dataset_file_path):
+        self.dataset_file_path = dataset_file_path
         inference_results = self.inference(dataset_file_path)
         logger.info(f"Inference success: {self.model_file_path}")
         self.postprocess(inference_results)
